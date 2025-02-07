@@ -5,12 +5,24 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
-import { Roboto } from "next/font/google";
+// import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@/context/theme-provider";
 import QueryProvider from "@/context/query-provider";
+import localFont from "next/font/local";
+
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
 
 // Font used
-const roboto = Roboto({ subsets: ["latin"], weight: "400" });
+// const roboto = Roboto({ subsets: ["latin"], weight: "400" });
 
 // Metadata
 export const metadata: Metadata = {
@@ -25,7 +37,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`bg-background ${roboto.className} antialiased`}>
+      {/*<body className={`bg-background ${roboto.className} antialiased`}>*/}
+      <body
+        className={`bg-background $${geistSans.variable} ${geistMono.variable} antialiased fluid-text`}
+      >
         <QueryProvider>
           <ThemeProvider
             attribute="class"
