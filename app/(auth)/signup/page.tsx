@@ -1,15 +1,12 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { defaultName } from "@/config/default-name";
 import { useMutation } from "@tanstack/react-query";
 import { registerMutationFn } from "@/lib/API/auth";
 import { toast } from "@/hooks/use-toast";
-import { passwordSchema } from "@/common/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,6 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { ArrowRight, Loader, MailCheckIcon } from "lucide-react";
+import { registerFormSchema } from "@/common/schemas/authFormSchemas";
 
 export default function SignUp() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -33,26 +31,9 @@ export default function SignUp() {
     mutationFn: registerMutationFn,
   });
 
-  // Zod form validation schema
-  const formSchema = z
-    .object({
-      name: z.string().trim().min(3, {
-        message: "Name is required with minimum length of 3",
-      }),
-      email: z.string().trim().email().min(1, {
-        message: "Email is required",
-      }),
-      password: passwordSchema,
-      confirmPassword: passwordSchema,
-    })
-    .refine((val) => val.password === val.confirmPassword, {
-      message: "Password does not match",
-      path: ["confirmPassword"],
-    });
-
   // Form default values
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof registerFormSchema>>({
+    resolver: zodResolver(registerFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -62,7 +43,7 @@ export default function SignUp() {
   });
 
   // Fn invocation on form submit
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values: z.infer<typeof registerFormSchema>) => {
     mutate(values, {
       onSuccess: () => {
         setIsSubmitted(true);
@@ -82,7 +63,7 @@ export default function SignUp() {
       {/* //FORM IF NOT SUBMITTED */}
       {!isSubmitted ? (
         <div className="w-full max-w-sm md:max-w-3xl">
-          <div className={cn("flex flex-col gap-6")}>
+          <div className="flex flex-col gap-6">
             <Card className="overflow-hidden">
               <CardContent className="grid p-0 md:grid-cols-2 ">
                 <div className="flex flex-col gap-6 p-6 md:p-8">
@@ -95,6 +76,7 @@ export default function SignUp() {
                   {/* FORM BODY */}
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
+                      {/* NAME */}
                       <div className="mb-4">
                         <FormField
                           control={form.control}
@@ -112,6 +94,8 @@ export default function SignUp() {
                           )}
                         />
                       </div>
+
+                      {/* EMAIL */}
                       <div className="mb-4">
                         <FormField
                           control={form.control}
@@ -129,6 +113,8 @@ export default function SignUp() {
                           )}
                         />
                       </div>
+
+                      {/* PASSWORD */}
                       <div className="mb-4">
                         <FormField
                           control={form.control}
@@ -146,6 +132,8 @@ export default function SignUp() {
                           )}
                         />
                       </div>
+
+                      {/* CONFIRM PASSWORD */}
                       <div className="mb-4">
                         <FormField
                           control={form.control}
@@ -163,8 +151,10 @@ export default function SignUp() {
                           )}
                         />
                       </div>
+
+                      {/* SUBMIT BUTTON */}
                       <Button
-                        className="w-full text-[15px] h-[40px] !bg-primary text-white font-semibold"
+                        className="w-full text-[15px] h-[40px] bg-primary text-white font-semibold"
                         type="submit"
                         disabled={isPending}
                       >
@@ -181,6 +171,7 @@ export default function SignUp() {
                     </span>
                   </div>
 
+                  {/* 3RD PARTY OUATH */}
                   <div className="grid grid-cols-3 gap-4">
                     {/* APPLE BUTTON */}
                     <Link href={"#TBD"}>
@@ -226,6 +217,15 @@ export default function SignUp() {
                         </svg>
                         <span className="sr-only">Login with Facebook</span>
                       </Button>
+                    </Link>
+                  </div>
+                  <div className="text-center text-sm hover:[&_a]:text-primary">
+                    Have account already?{" "}
+                    <Link
+                      href={"/signin"}
+                      className="underline underline-offset-4"
+                    >
+                      Sign in
                     </Link>
                   </div>
                 </div>
