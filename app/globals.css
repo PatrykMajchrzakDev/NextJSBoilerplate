@@ -88,3 +88,14 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .fluid-text {
+    font-size: clamp(
+      1rem,
+      /* Min font size (16px at 568px) */ 0.6125rem + 0.929vw,
+      /* Fluid formula: scales between 568px and 1300px */ 1.3rem
+        /* Max font size (24px at 1300px) */
+    );
+  }
+}
