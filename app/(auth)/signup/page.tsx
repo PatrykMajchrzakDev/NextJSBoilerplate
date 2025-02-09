@@ -68,7 +68,7 @@ export default function SignUp() {
               <CardContent className="grid p-0 md:grid-cols-2 ">
                 <div className="flex flex-col gap-6 p-6 md:p-8">
                   <div className="flex flex-col items-center text-center">
-                    <h1 className="text-2xl font-bold">Hello there!</h1>
+                    <h1 className="font-bold">Hello there!</h1>
                     <p className="text-balance text-muted-foreground">
                       Register your {defaultName.appName} account
                     </p>
@@ -83,7 +83,7 @@ export default function SignUp() {
                           name="name"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="dark:text-[#f1f7feb5] text-sm">
+                              <FormLabel className="dark:text-[#f1f7feb5]">
                                 Name
                               </FormLabel>
                               <FormControl>
@@ -102,7 +102,7 @@ export default function SignUp() {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="dark:text-[#f1f7feb5] text-sm">
+                              <FormLabel className="dark:text-[#f1f7feb5]">
                                 Email
                               </FormLabel>
                               <FormControl>
@@ -121,7 +121,7 @@ export default function SignUp() {
                           name="password"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="dark:text-[#f1f7feb5] text-sm">
+                              <FormLabel className="dark:text-[#f1f7feb5]">
                                 Password
                               </FormLabel>
                               <FormControl>
@@ -140,7 +140,7 @@ export default function SignUp() {
                           name="confirmPassword"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="dark:text-[#f1f7feb5] text-sm">
+                              <FormLabel className="dark:text-[#f1f7feb5]">
                                 Confirm Password
                               </FormLabel>
                               <FormControl>
@@ -154,7 +154,7 @@ export default function SignUp() {
 
                       {/* SUBMIT BUTTON */}
                       <Button
-                        className="w-full text-[15px] h-[40px] bg-primary text-white font-semibold"
+                        className="w-full h-[40px] bg-primary text-white font-semibold"
                         type="submit"
                         disabled={isPending}
                       >
@@ -165,7 +165,7 @@ export default function SignUp() {
                     </form>
                   </Form>
 
-                  <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+                  <div className="relative fluid-text-sm text-center after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
                     <span className="relative z-10 bg-background px-2 text-muted-foreground">
                       Or continue with
                     </span>
@@ -219,7 +219,7 @@ export default function SignUp() {
                       </Button>
                     </Link>
                   </div>
-                  <div className="text-center text-sm hover:[&_a]:text-primary">
+                  <div className="text-center hover:[&_a]:text-primary">
                     Have account already?{" "}
                     <Link
                       href={"/signin"}
@@ -242,7 +242,7 @@ export default function SignUp() {
             </Card>
 
             {/* FOOTER */}
-            <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+            <div className="text-balance fluid-text-sm text-center text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
               By clicking continue, you agree to our{" "}
               <a href="#TBD">Terms of Service</a> and{" "}
               <a href="#TBD">Privacy Policy</a>.
@@ -255,10 +255,10 @@ export default function SignUp() {
           <div className="size-[48px]">
             <MailCheckIcon size="48px" className="animate-bounce" />
           </div>
-          <h2 className="text-xl tracking-[-0.16px] dark:text-[#fcfdffef] font-bold">
+          <h2 className="tracking-[-0.16px] dark:text-[#fcfdffef] font-bold">
             Check your email
           </h2>
-          <p className="mb-2 text-center text-sm text-muted-foreground dark:text-[#f1f7feb5] font-normal">
+          <p className="mb-2 text-center text-muted-foreground dark:text-[#f1f7feb5] font-normal">
             We have just sent a verification link to {form.getValues().email}.
           </p>
           <Link href="/signin">
