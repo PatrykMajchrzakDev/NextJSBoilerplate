@@ -63,13 +63,16 @@ export default function Login() {
   };
   return (
     <main className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10 w-full">
-      <div className="w-full max-w-sm md:max-w-3xl">
+      {/* LOGIN SECTION */}
+      <section className="w-full max-w-sm md:max-w-3xl">
         <div className="flex flex-col gap-6">
+          {/* CONTAINERS */}
           <Card className="overflow-hidden">
             <CardContent className="grid p-0 md:grid-cols-2 ">
+              {/* LEFT SIDE CONTENT */}
               <div className="flex flex-col gap-6 p-6 md:p-8">
                 <div className="flex flex-col items-center text-center">
-                  <h1 className="text-2xl font-bold">Welcome back!</h1>
+                  <h1 className="font-bold">Welcome back!</h1>
                   <p className="text-balance text-muted-foreground">
                     Login to your {defaultName.appName} account
                   </p>
@@ -78,13 +81,14 @@ export default function Login() {
                 {/* FORM BODY */}
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)}>
+                    {/* EMAIL */}
                     <div className="mb-4">
                       <FormField
                         control={form.control}
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="dark:text-[#f1f7feb5] text-sm">
+                            <FormLabel className="dark:text-[#f1f7feb5]">
                               Email
                             </FormLabel>
                             <FormControl>
@@ -95,15 +99,25 @@ export default function Login() {
                         )}
                       />
                     </div>
+                    {/* PASSWORD */}
                     <div className="mb-4">
                       <FormField
                         control={form.control}
                         name="password"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="dark:text-[#f1f7feb5] text-sm">
+                            <FormLabel className="dark:text-[#f1f7feb5] flex justify-between w-full">
                               Password
+                              <Link
+                                href={`/forgot-password?email=${
+                                  form.getValues().email
+                                }`}
+                                className="ml-auto underline-offset-4 hover:underline hover:text-primary"
+                              >
+                                Forgot your password?
+                              </Link>
                             </FormLabel>
+
                             <FormControl>
                               <Input {...field} type="password" />
                             </FormControl>
@@ -112,8 +126,9 @@ export default function Login() {
                         )}
                       />
                     </div>
+                    {/* LOGIN BUTTON */}
                     <Button
-                      className="w-full text-[15px] h-[40px] bg-primary text-white font-semibold"
+                      className="w-full h-[40px] bg-primary text-white font-semibold"
                       type="submit"
                       disabled={isPending}
                     >
@@ -123,12 +138,15 @@ export default function Login() {
                     </Button>
                   </form>
                 </Form>
-                <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+
+                {/* SPACER */}
+                <div className="relative fluid-text-sm text-center after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
                   <span className="relative z-10 bg-background px-2 text-muted-foreground">
                     Or continue with
                   </span>
                 </div>
 
+                {/* PROVIDERS LOGIN SECTION */}
                 <div className="grid grid-cols-3 gap-4">
                   {/* APPLE BUTTON */}
                   <Link href={"#TBD"}>
@@ -176,7 +194,9 @@ export default function Login() {
                     </Button>
                   </Link>
                 </div>
-                <div className="text-center text-sm hover:[&_a]:text-primary">
+
+                {/* DON'T HAVE ACCOUNT SECTION */}
+                <div className="text-center hover:[&_a]:text-primary">
                   Don&apos;t have an account?{" "}
                   <Link
                     href={"/signup"}
@@ -191,7 +211,7 @@ export default function Login() {
               <div className="relative hidden bg-muted md:block">
                 <img
                   src="/auth/signup-side-img.webp"
-                  alt="Side photo showing plane and travelling accessories"
+                  alt="Side photo showing plane and traveling accessories"
                   className="absolute inset-0 h-full object-cover dark:brightness-[0.2] dark:grayscale"
                 />
               </div>
@@ -199,13 +219,13 @@ export default function Login() {
           </Card>
 
           {/* FOOTER */}
-          <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+          <div className="text-balance fluid-text-sm text-center text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
             By clicking continue, you agree to our{" "}
             <a href="#TBD">Terms of Service</a> and{" "}
             <a href="#TBD">Privacy Policy</a>.
           </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

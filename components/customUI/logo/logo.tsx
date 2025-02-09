@@ -2,28 +2,46 @@
 // ==================== APP LOGO ===================
 // =================================================
 
+import { Button } from "@/components/ui/button";
+import { SheetTrigger } from "@/components/ui/sheet";
+import { defaultName } from "@/config/default-name";
+import { Dialog } from "@radix-ui/react-dialog";
+import { Menu, Sparkles } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import SideMenuContent from "../nav/SideMenuContent";
 
-const Logo = (props: { url?: string; size?: string; fontSize?: string }) => {
+export const Logo = () => {
   // Arguments provided
-  const { url = "/", size = "40px", fontSize = "24px" } = props;
   return (
-    <div className="flex items-center justify-center">
-      <Link
-        href={url}
-        className="
-             rounded-lg flex items-center border-2 dark:border-gray-200
-             justify-center bg-gradient-to-br from-orange-200 to-primary to-90%
-              "
-        style={{ width: size, height: size }}
-      >
-        <span className="font-bold text-gray-50" style={{ fontSize: fontSize }}>
-          B
-        </span>
+    <div className="hidden lg:flex items-center gap-2">
+      <Link href="/" prefetch={true} className="flex items-center gap-2">
+        <Sparkles className="h-5 w-5 text-primary" />
+        <span className="font-semibold">{defaultName.appName}</span>
       </Link>
     </div>
   );
 };
 
-export default Logo;
+export const MobileLogoAndHamburger = ({
+  user,
+}: {
+  user: {
+    userId: string;
+  };
+}) => (
+  <div className="flex lg:hidden items-center gap-2">
+    <Dialog>
+      <SheetTrigger asChild>
+        <Button variant="ghost" size="icon" className="lg:hidden">
+          <Menu className="h-5 w-5" />
+        </Button>
+      </SheetTrigger>
+      <SideMenuContent userId={user.userId} />
+    </Dialog>
+    <Link href="/" prefetch={true} className="flex items-center gap-2">
+      <Sparkles className="h-5 w-5 text-primary" />
+      <span className="font-semibold">{defaultName.appName}</span>
+    </Link>
+  </div>
+);
