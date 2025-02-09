@@ -8,18 +8,14 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { Dialog } from "@radix-ui/react-dialog";
 import { motion } from "framer-motion";
-import { Menu, Sparkles } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 import ModeToggle from "@/components/ui/mode-toggle";
 import { Button } from "@/components/ui/button";
-import { SheetTrigger } from "@/components/ui/sheet";
 import { NavUser } from "./NavUser";
-import { defaultName } from "@/config/default-name";
 import { navComponents } from "./nav-components";
-import SideMenuContent from "./SideMenuContent";
+import { Logo, MobileLogoAndHamburger } from "../logo/logo";
 
 const data = {
   user: {
@@ -37,7 +33,7 @@ export default function NavBar() {
   let userId = "1";
 
   return (
-    <motion.div
+    <motion.nav
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -45,28 +41,10 @@ export default function NavBar() {
     >
       <div className="flex items-center justify-between p-4 lg:px-4 lg:py-1 max-w-7xl mx-auto">
         {/* This is mobile menu - Mobile */}
-        <div className="flex lg:hidden items-center gap-2">
-          <Dialog>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden">
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SideMenuContent userId={user.userId} />
-          </Dialog>
-          <Link href="/" prefetch={true} className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-blue-600" />
-            <span className="font-semibold">{defaultName.appName}</span>
-          </Link>
-        </div>
+        <MobileLogoAndHamburger user={user} />
 
         {/* Logo - Desktop */}
-        <div className="hidden lg:flex items-center gap-2">
-          <Link href="/" prefetch={true} className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-blue-600" />
-            <span className="font-semibold">{defaultName.appName}</span>
-          </Link>
-        </div>
+        <Logo />
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-6">
@@ -114,7 +92,7 @@ export default function NavBar() {
             <Link href="/sign-in" prefetch={true}>
               <Button
                 variant="default"
-                className="bg-blue-600 hover:bg-blue-500 text-white"
+                className="bg-primary hover:bg-primary text-white"
               >
                 Sign in
               </Button>
@@ -124,7 +102,7 @@ export default function NavBar() {
           {userId && <NavUser user={data.user} />}
         </div>
       </div>
-    </motion.div>
+    </motion.nav>
   );
 }
 
@@ -143,8 +121,8 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <div className="fluid-text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 fluid-text-sm leading-snug text-muted-foreground">
             {children}
           </p>
         </a>
