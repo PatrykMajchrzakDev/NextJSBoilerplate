@@ -234,7 +234,7 @@ export default function SignUp() {
                 <div className="relative hidden bg-muted md:block">
                   <img
                     src="/auth/signup-side-img.webp"
-                    alt="Side photo showing plane and travelling accessories"
+                    alt="Side photo showing plane and traveling accessories"
                     className="absolute inset-0 h-full object-cover dark:brightness-[0.2] dark:grayscale"
                   />
                 </div>
