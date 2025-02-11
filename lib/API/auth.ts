@@ -17,6 +17,10 @@ type RegisterType = {
   confirmPassword: string;
 };
 
+type ForgotPasswordType = {
+  email: string;
+};
+
 // ============== API call functions ===============
 
 // LOGIN
@@ -26,3 +30,8 @@ export const loginMutationFn = async (data: LoginType) =>
 // REGISTER
 export const registerMutationFn = async (data: RegisterType) =>
   await API.post("/auth/register", data);
+
+// FORGOT PASSWORD
+export const forgotPasswordMutationFn = async (data: ForgotPasswordType) => {
+  await API.post("/auth/password/forgot", data);
+};
