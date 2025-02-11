@@ -95,9 +95,6 @@ html {
   label {
     @apply fluid-text-sm;
   }
-  button {
-    @apply fluid-text;
-  }
 }
 
 @layer utilities {
