@@ -11,10 +11,15 @@ import Link from "next/link";
 import React from "react";
 import SideMenuContent from "../nav/SideMenuContent";
 
-export const Logo = () => {
+type LogoTypeParams = {
+  isHidden: "hidden" | "";
+};
+
+export const Logo = (props: LogoTypeParams) => {
+  const { isHidden } = props;
   // Arguments provided
   return (
-    <div className="hidden lg:flex items-center gap-2">
+    <div className={`${isHidden} lg:flex items-center gap-2`}>
       <Link href="/" prefetch={true} className="flex items-center gap-2">
         <Sparkles className="h-5 w-5 text-primary" />
         <span className="font-semibold">{defaultName.appName}</span>
