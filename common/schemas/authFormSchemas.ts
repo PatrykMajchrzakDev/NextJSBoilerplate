@@ -25,3 +25,14 @@ export const registerFormSchema = z
     message: "Password does not match",
     path: ["confirmPassword"],
   });
+
+// Zod RESET PASSWORD form validation schema
+export const resetPasswordSchema = z
+  .object({
+    password: passwordSchema,
+    confirmPassword: passwordSchema,
+  })
+  .refine((val) => val.password === val.confirmPassword, {
+    message: "Password does not match",
+    path: ["confirmPassword"],
+  });

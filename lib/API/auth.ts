@@ -21,6 +21,11 @@ type ForgotPasswordType = {
   email: string;
 };
 
+type ResetPasswordType = {
+  password: string;
+  verificationCode: string;
+};
+
 // ============== API call functions ===============
 
 // LOGIN
@@ -34,4 +39,9 @@ export const registerMutationFn = async (data: RegisterType) =>
 // FORGOT PASSWORD
 export const forgotPasswordMutationFn = async (data: ForgotPasswordType) => {
   await API.post("/auth/password/forgot", data);
+};
+
+// RESET PASSWORD
+export const resetPasswordMutationFn = async (data: ResetPasswordType) => {
+  await API.post("/auth/password/reset", data);
 };
