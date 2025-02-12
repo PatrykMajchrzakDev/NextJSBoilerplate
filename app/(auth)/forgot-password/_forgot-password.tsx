@@ -3,7 +3,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Link, Loader, MailCheckIcon } from "lucide-react";
+import { ArrowRight, Loader, MailCheckIcon } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -20,6 +20,7 @@ import { forgotPasswordMutationFn } from "@/lib/API/auth";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function ForgotPassword() {
   const params = useSearchParams();
@@ -51,7 +52,6 @@ export default function ForgotPassword() {
         setIsSubmitted(true);
       },
       onError: (error) => {
-        console.log(error);
         toast({
           title: "Error",
           description: error.message,
@@ -63,6 +63,7 @@ export default function ForgotPassword() {
 
   return (
     <section className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10 w-full">
+      {/* Initial content */}
       {!isSubmitted ? (
         <div className="w-full max-w-sm md:max-w-xl rounded-md">
           <Card className="p-6 md:p-10">
@@ -81,6 +82,8 @@ export default function ForgotPassword() {
                 Include the email address associated with your account and we’ll
                 send you an email with instructions to reset your password.
               </p>
+
+              {/* FORM CONTENT */}
               <Form {...form}>
                 <form
                   className="flex flex-col gap-6"
@@ -107,6 +110,7 @@ export default function ForgotPassword() {
                     className="w-full md:w-1/2 h-[40px] text-white font-semibold"
                     disabled={isPending}
                   >
+                    {/* ADD SPINNER WHEN BUTTON API CALL */}
                     {isPending && <Loader className="animate-spin" />}
                     Send reset instructions
                     <ArrowRight />
@@ -117,6 +121,7 @@ export default function ForgotPassword() {
           </Card>
         </div>
       ) : (
+        // IF SUCCESS
         <div className="w-full h-[80vh] flex flex-col gap-2 items-center justify-center rounded-md">
           <div className="size-[48px]">
             <MailCheckIcon size="48px" className="animate-bounce" />
@@ -127,7 +132,7 @@ export default function ForgotPassword() {
           <p className="mb-2 text-center text-muted-foreground dark:text-[#f1f7feb5] font-normal">
             We have just sent a password reset link to {form.getValues().email}.
           </p>
-          <Link href="/">
+          <Link href="/signin">
             <Button className="h-[40px]">
               Go to login
               <ArrowRight />
