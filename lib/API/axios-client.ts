@@ -18,18 +18,29 @@ const options = {
 // Axios initialization
 const API = axios.create(options);
 
+// This is used to refresh user access and refresh tokens
+export const APIRefresh = axios.create(options);
+
 // This handles what to do with response and error
+
 API.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => {
+  async (error) => {
     const { data, status } = error.response;
-
-    if (data === "Unauthorized" && status === 401)
-      return Promise.reject({
-        ...data,
-      });
+    console.log(data, "data");
+    if (data.errorCode === "AUTH_TOKEN_NOT_FOUND" && status === 401) {
+      try {
+        await APIRefresh.get("/auth/refresh");
+        return APIRefresh(error.config);
+      } catch (error) {
+        window.location.href = "/";
+      }
+    }
+    return Promise.reject({
+      ...data,
+    });
   }
 );
 
