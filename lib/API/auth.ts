@@ -26,6 +26,14 @@ type ResetPasswordType = {
   verificationCode: string;
 };
 
+type VerifyEmailType = {
+  code: string;
+};
+
+type ResenedEmailVerificationType = {
+  email: string;
+};
+
 // ============== API call functions ===============
 
 // LOGIN
@@ -44,4 +52,16 @@ export const forgotPasswordMutationFn = async (data: ForgotPasswordType) => {
 // RESET PASSWORD
 export const resetPasswordMutationFn = async (data: ResetPasswordType) => {
   await API.post("/auth/password/reset", data);
+};
+
+// VERIFY EMAIL
+export const verifyEmailMutationFn = async (data: VerifyEmailType) => {
+  await API.post("/auth/verify/email", data);
+};
+
+// RESEND ACCOUNT VERIFICATION EMAIL
+export const resendEmailVerificationMutationFn = async (
+  data: ResenedEmailVerificationType
+) => {
+  await API.post("/auth/resend/email-verification", data);
 };
