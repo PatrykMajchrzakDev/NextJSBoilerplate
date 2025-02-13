@@ -1,11 +1,9 @@
-import { passwordSchema } from "@/common/validation/auth";
+import { emailSchema, passwordSchema } from "@/common/validation/auth";
 import { z } from "zod";
 
 // Zod LOGIN form validation schema
 export const loginFormSchema = z.object({
-  email: z.string().trim().email().min(1, {
-    message: "Email is required",
-  }),
+  email: emailSchema,
   password: passwordSchema,
 });
 
@@ -36,3 +34,13 @@ export const resetPasswordSchema = z
     message: "Password does not match",
     path: ["confirmPassword"],
   });
+
+// Zod RESEND VERIFICATION EMAIL form validation schema
+export const resendVerificationEmailSChema = z.object({
+  email: emailSchema,
+});
+
+// Zod SEND FORGOT PASSWORD EMAIL form validation schema
+export const forgotPasswordSChema = z.object({
+  email: emailSchema,
+});

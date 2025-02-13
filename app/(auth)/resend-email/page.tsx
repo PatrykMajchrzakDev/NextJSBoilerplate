@@ -16,32 +16,28 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/customUI/logo/logo";
 import { Card, CardContent } from "@/components/ui/card";
-import { forgotPasswordMutationFn } from "@/lib/API/auth";
+import { resendEmailVerificationMutationFn } from "@/lib/API/auth";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { forgotPasswordSChema } from "@/common/schemas/authFormSchemas";
+import { resendVerificationEmailSChema } from "@/common/schemas/authFormSchemas";
 
-export default function ForgotPassword() {
-  const params = useSearchParams();
-  // Get email from params url
-  const email = params.get("email");
-
+export default function ResendEmail() {
+  // State for
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const { mutate, isPending } = useMutation({
-    mutationFn: forgotPasswordMutationFn,
+    mutationFn: resendEmailVerificationMutationFn,
   });
 
-  const form = useForm<z.infer<typeof forgotPasswordSChema>>({
-    resolver: zodResolver(forgotPasswordSChema),
+  const form = useForm<z.infer<typeof resendVerificationEmailSChema>>({
+    resolver: zodResolver(resendVerificationEmailSChema),
     defaultValues: {
-      email: email || "",
+      email: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof forgotPasswordSChema>) => {
+  const onSubmit = (values: z.infer<typeof resendVerificationEmailSChema>) => {
     mutate(values, {
       onSuccess: () => {
         setIsSubmitted(true);
@@ -71,11 +67,11 @@ export default function ForgotPassword() {
                 className="tracking-[-0.16px] dark:text-[#fcfdffef] font-bold mb-1.5 mt-8
         text-center sm:text-left"
               >
-                Reset password
+                Resend account verification email
               </h1>
               <p className="mb-6 text-center sm:text-left  dark:text-[#f1f7feb5] font-normal">
                 Include the email address associated with your account and we’ll
-                send you an email with instructions to reset your password.
+                resend you an email with instructions to activate your account.
               </p>
 
               {/* FORM CONTENT */}
@@ -125,7 +121,7 @@ export default function ForgotPassword() {
             Check your email
           </h2>
           <p className="mb-2 text-center text-muted-foreground dark:text-[#f1f7feb5] font-normal">
-            We have just sent a password reset link to {form.getValues().email}.
+            We have just sent you a link to {form.getValues().email}.
           </p>
           <Link href="/signin">
             <Button className="h-[40px]">

@@ -5,6 +5,7 @@
 const defaultNameInApp = () => ({
   // General app names
   appName: "NextJSBoilerplate",
+  supportEmail: "support@support.com",
 });
 
 export const defaultName = defaultNameInApp();

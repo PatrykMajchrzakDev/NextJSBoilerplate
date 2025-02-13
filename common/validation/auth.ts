@@ -22,3 +22,8 @@ export const userNameSchema = z
   .trim()
   .min(3, "Minimum length of 3")
   .max(30, "Maximum length of 30");
+
+// Zod validator for email
+export const emailSchema = z.string().trim().email().min(1, {
+  message: "Email is required",
+});
