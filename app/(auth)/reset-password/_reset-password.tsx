@@ -85,10 +85,10 @@ export default function ResetPassword() {
   };
 
   return (
-    <section className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10 w-full">
+    <main className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10 w-full">
       {/* IF PROVIDED CODE IN URL IS VALID */}
       {isValid ? (
-        <div className="w-full max-w-sm md:max-w-xl rounded-md">
+        <section className="w-full max-w-sm md:max-w-xl rounded-md">
           <Card className="p-6 md:p-10">
             <Logo isHidden="" />
 
@@ -154,7 +154,7 @@ export default function ResetPassword() {
               </form>
             </Form>
           </Card>
-        </div>
+        </section>
       ) : (
         // RETURN INVALID MESSAGE IF CODE IS EXPIRED
         <div className="w-full h-[80vh] flex flex-col gap-2 items-center justify-center rounded-md">
@@ -175,6 +175,6 @@ export default function ResetPassword() {
           </Link>
         </div>
       )}
-    </section>
+    </main>
   );
 }
