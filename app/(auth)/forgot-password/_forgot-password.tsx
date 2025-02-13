@@ -21,6 +21,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { forgotPasswordSChema } from "@/common/schemas/authFormSchemas";
 
 export default function ForgotPassword() {
   const params = useSearchParams();
@@ -33,20 +34,14 @@ export default function ForgotPassword() {
     mutationFn: forgotPasswordMutationFn,
   });
 
-  const formSchema = z.object({
-    email: z.string().trim().email().min(1, {
-      message: "Email is required",
-    }),
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof forgotPasswordSChema>>({
+    resolver: zodResolver(forgotPasswordSChema),
     defaultValues: {
       email: email || "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values: z.infer<typeof forgotPasswordSChema>) => {
     mutate(values, {
       onSuccess: () => {
         setIsSubmitted(true);
@@ -62,10 +57,10 @@ export default function ForgotPassword() {
   };
 
   return (
-    <section className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10 w-full">
+    <main className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10 w-full">
       {/* Initial content */}
       {!isSubmitted ? (
-        <div className="w-full max-w-sm md:max-w-xl rounded-md">
+        <section className="w-full max-w-sm md:max-w-xl rounded-md">
           <Card className="p-6 md:p-10">
             <CardContent>
               <div className="flex justify-center sm:justify-start w-full">
@@ -119,7 +114,7 @@ export default function ForgotPassword() {
               </Form>
             </CardContent>
           </Card>
-        </div>
+        </section>
       ) : (
         // IF SUCCESS
         <div className="w-full h-[80vh] flex flex-col gap-2 items-center justify-center rounded-md">
@@ -140,6 +135,6 @@ export default function ForgotPassword() {
           </Link>
         </div>
       )}
-    </section>
+    </main>
   );
 }
