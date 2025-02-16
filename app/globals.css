@@ -119,3 +119,14 @@ html {
     font-size: clamp(1.5rem, 0.6125rem + 1vw, 1.8rem);
   }
 }
+
+/* Gradient used for  */
+.steps-gradient {
+  background: linear-gradient(
+    180deg,
+    transparent 0,
+    #00002f26 10%,
+    #00002f26 90%,
+    transparent 100%
+  );
+}
