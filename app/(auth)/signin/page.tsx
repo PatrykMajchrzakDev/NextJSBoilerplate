@@ -49,7 +49,7 @@ export default function Login() {
           router.replace(`/verify-mfa?email=${values.email}`);
           return;
         }
-        router.replace("/home");
+        router.replace("/user-profile");
       },
       onError: (error) => {
         console.log(error);

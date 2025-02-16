@@ -2,6 +2,7 @@
 // ========== ALL AUTH RELATED APIS CALLS ==========
 // =================================================
 
+import User from "@/common/types/user-type";
 import API from "./axios-client";
 
 // ============ Types used in API calls ============
@@ -65,3 +66,7 @@ export const resendEmailVerificationMutationFn = async (
 ) => {
   await API.post("/auth/resend/email-verification", data);
 };
+
+// FETCHES USER DETAILS
+export const getUserQueryFn = async () =>
+  await API.get<User>("/session");

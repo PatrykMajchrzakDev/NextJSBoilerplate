@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/context/theme-provider";
 import QueryProvider from "@/context/query-provider";
 import localFont from "next/font/local";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -51,6 +52,8 @@ export default function RootLayout({
             {children}
             <Toaster />
           </ThemeProvider>
+          {/* Show ReactQueryDevTools if there is DEV */}
+          {process.env.NEXT_ENV === "development" && <ReactQueryDevtools />}
         </QueryProvider>
       </body>
     </html>
