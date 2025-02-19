@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-// import { useUser } from "./lib/API/user";
+import { ParamsError } from "./common/types/params-error";
 
-const protectedRoutes = ["/dashboard", "/sessions", "/profile"];
+const protectedRoutes = ["/dashboard", "/sessions", "/user-profile"];
 const authRoutes = [
   "/signin",
   "/signup",
@@ -14,7 +14,6 @@ const authRoutes = [
 const openRoutes = ["/forgot-password", "/"];
 
 export default async function protectedRoute(req: NextRequest) {
-  // const { data, isLoading, error } = useUser();
   // Path user tries to access
   const path = req.nextUrl.pathname;
 
@@ -26,13 +25,11 @@ export default async function protectedRoute(req: NextRequest) {
   // Access token from cookies aquired upon login
   const accessToken = req.cookies.get("accessToken")?.value;
 
-  // if (!data || error) {
-  //   return NextResponse.redirect(new URL("/", req.nextUrl));
-  // }
-
   // Redirects unauthenticated user to default page
   if (isProtectedRoute && !accessToken) {
-    return NextResponse.redirect(new URL("/signin", req.nextUrl));
+    return NextResponse.redirect(
+      new URL(`/signin?error=${ParamsError.AUTH_ERROR.code}`, req.nextUrl)
+    );
   }
 
   // Redirects to open route
@@ -45,6 +42,5 @@ export default async function protectedRoute(req: NextRequest) {
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
-  // If anything else then just pass the request
   return NextResponse.next();
 }
