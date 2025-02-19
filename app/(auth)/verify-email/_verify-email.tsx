@@ -38,8 +38,6 @@ const VerifyEmail = () => {
       router.replace("/resend-email");
       return;
     }
-
-    console.log("asd");
     // If code is present then call API
     mutate(
       {
