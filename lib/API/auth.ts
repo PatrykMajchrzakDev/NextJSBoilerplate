@@ -2,7 +2,7 @@
 // ========== ALL AUTH RELATED APIS CALLS ==========
 // =================================================
 
-import User from "@/common/types/user-type";
+import { AuthResponseUser } from "@/common/types/user-type";
 import API from "./axios-client";
 
 // ============ Types used in API calls ============
@@ -33,6 +33,17 @@ type VerifyEmailType = {
 
 type ResenedEmailVerificationType = {
   email: string;
+};
+
+export type mfaType = {
+  message: string;
+  secret: string;
+  qrImageUrl: string;
+};
+
+type verifyMFAType = {
+  code: string;
+  secretKey: string;
 };
 
 // ============== API call functions ===============
@@ -69,4 +80,15 @@ export const resendEmailVerificationMutationFn = async (
 
 // FETCHES USER DETAILS
 export const getUserQueryFn = async () =>
-  await API.get<User>("/session");
+  await API.get<AuthResponseUser>("/session");
+
+// MFA SETUP
+export const mfaSetupQueryFn = async () => {
+  const response = await API.get<mfaType>("/mfa/setup");
+  return response.data;
+};
+
+// VERIFY MFA CODE
+export const verifyMFAMutationFn = async (data: verifyMFAType) => {
+  await API.post("/mfa/verify", data);
+};

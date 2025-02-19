@@ -58,12 +58,12 @@ export default function SignUp() {
     });
   };
   return (
-    <main className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10 w-full">
+    <main className="flex min-h-svh flex-col items-center justify-center bg-muted dark:bg-background p-6 md:p-10 w-full">
       {/* //FORM IF NOT SUBMITTED */}
       {!isSubmitted ? (
         <div className="w-full max-w-sm md:max-w-3xl">
           <div className="flex flex-col gap-6">
-            <Card className="overflow-hidden">
+            <Card className="overflow-hidden bg-card">
               <CardContent className="grid p-0 md:grid-cols-2 ">
                 <div className="flex flex-col gap-6 p-6 md:p-8">
                   <div className="flex flex-col items-center text-center">
@@ -165,7 +165,7 @@ export default function SignUp() {
                   </Form>
 
                   <div className="relative fluid-text-sm text-center after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-                    <span className="relative z-10 bg-background px-2 text-muted-foreground">
+                    <span className="relative z-10 bg-card px-2 text-muted-foreground">
                       Or continue with
                     </span>
                   </div>
@@ -234,7 +234,7 @@ export default function SignUp() {
                   <img
                     src="/auth/signup-side-img.webp"
                     alt="Side photo showing plane and traveling accessories"
-                    className="absolute inset-0 h-full object-cover dark:brightness-[0.5]"
+                    className="absolute inset-0 h-full object-cover dark:brightness-[0.85]"
                   />
                 </div>
               </CardContent>

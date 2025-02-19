@@ -57,11 +57,11 @@ export default function ForgotPassword() {
   };
 
   return (
-    <main className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10 w-full">
+    <main className="flex min-h-svh flex-col items-center justify-center bg-muted dark:bg-background p-6 md:p-10 w-full">
       {/* Initial content */}
       {!isSubmitted ? (
         <section className="w-full max-w-sm md:max-w-xl rounded-md">
-          <Card className="p-6 md:p-10">
+          <Card className="p-6 md:p-10 bg-card">
             <CardContent>
               <div className="flex justify-center sm:justify-start w-full">
                 <Logo isHidden="" />

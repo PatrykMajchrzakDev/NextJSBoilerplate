@@ -5,6 +5,7 @@
 const queryKeys = () => ({
   getUser: "user",
   getUserDetails: "userDetails",
+  getMFASetup: "mfaSetup",
 });
 
 export const defaultQueryKeys = queryKeys();

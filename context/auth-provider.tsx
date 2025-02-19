@@ -1,6 +1,6 @@
 "use client";
 
-import User from "@/common/types/user-type";
+import { User } from "@/common/types/user-type";
 import { useUser } from "@/lib/API/user";
 import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect } from "react";
@@ -20,7 +20,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const router = useRouter();
   const { data, error, isLoading, isFetching, refetch } = useUser();
-  const user = data?.data;
+  const user = data?.data.user as User;
 
   useEffect(() => {
     if (!isLoading && !isFetching && !user) {
@@ -33,7 +33,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }
 
   if (!user) {
-    return null; // useEffect will handle the redirect
+    return null;
   }
 
   return (

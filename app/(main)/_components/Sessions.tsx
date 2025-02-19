@@ -1,5 +1,6 @@
 import React from "react";
 import SessionItem from "./SessionItem";
+import { defaultName } from "@/config/default-name";
 
 const Sessions = () => {
   return (
@@ -9,17 +10,16 @@ const Sessions = () => {
           Sessions
         </h3>
         <p className="mb-6 max-w-xl text-sm text-[#0007149f] dark:text-gray-100 font-normal">
-          Sessions are the devices you are using or that have used your Squeezy
-          These are the sessions where your account is currently logged in. You
-          can log out of each session.
+          Sessions are the devices you are using or were logged in to this account. These are the sessions where your account is
+          currently logged in. You can log out of each session.
         </p>
 
         <div className="rounded-t-xl max-w-xl">
           <div>
             <h5 className="text-base font-semibold">Current active session</h5>
             <p className="mb-6 text-sm text-[#0007149f] dark:text-gray-100">
-              You’re logged into this Squeezy account on this device and are
-              currently using it.
+              You’re logged into this {defaultName.appName} account on this
+              device and are currently using it.
             </p>
           </div>
           <div className="w-full">
