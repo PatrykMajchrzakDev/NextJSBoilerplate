@@ -33,6 +33,7 @@ import { mfaType, verifyMFAMutationFn } from "@/lib/API/auth";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
+import RevokeMFA from "./RevokeMFA";
 
 const EnableMfa = () => {
   // State for dialog window
@@ -90,7 +91,7 @@ const EnableMfa = () => {
         // Success msg if everything went fine
         toast({
           title: "Success",
-          description: response.message,
+          description: response.data.message || "Added MFA successfully",
         });
       },
       // Error msg
@@ -135,9 +136,7 @@ const EnableMfa = () => {
 
         {/* If user has enabled MFA then show button to revoke MFA */}
         {user?.userPreferences.enable2FA ? (
-          <Button className="h-[35px] text-[#c40006d3] bg-red-100 shadow-none mr-1">
-            Revoke Access
-          </Button>
+          <RevokeMFA />
         ) : (
           // If user has not MFA enabled then show dialog to enable MFA
           <Dialog modal open={isOpen} onOpenChange={setIsOpen}>
