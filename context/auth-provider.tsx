@@ -1,6 +1,7 @@
 "use client";
 
 import { User } from "@/common/types/user-type";
+import { DashboardSkeleton } from "@/components/customUI/Skeleton";
 import { useUser } from "@/lib/API/user";
 import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect } from "react";
@@ -28,12 +29,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [isLoading, isFetching, user, router]);
 
-  if (isLoading || isFetching) {
-    return <div>Loading...</div>; // Show loading state while checking auth status
+  if (isLoading || isFetching || !user) {
+    return (
+      <div className="max-w-[1000px] mx-auto mt-10">
+        <DashboardSkeleton />
+      </div>
+    );
   }
 
   if (!user) {
-    return null;
+    return;
   }
 
   return (
